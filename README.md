@@ -1,3 +1,7 @@
+# Vorarbeiten
+
+Im AD werden die Testbenutzer mit Email angelegt.
+
 # privacyIDEA installieren
 
 privacyIDEA ist eine Python Web-Applikation und kann auf viele verschiedene Weisen 
@@ -142,18 +146,53 @@ Es gibt zur Zeit die folgenden Module:
 * Script
 * Counter
 
+Siehe https://privacyidea.readthedocs.io/en/latest/eventhandler/index.html
+
 ## Aufgaben
 
 * Legen Sie einen Event Handler an, der den Benutzer mit einer Email benachrichtigt, wenn 
   der Administrator für ihn einen neuen Token ausrollt.
 * Legen Sie einen Event Handler an, der den Token deaktiviert, wenn der Administrator
   einen TOTP-Token ausrollt.
+* Legen Sie einen Event Handler an, der dem Benutzer einen Email-Token ausrollt, wenn der
+  Benutzer sich authentisiert, aber keinen Token hat! Diesen Token kann der Benutzer sofort
+  für die Authentifizierung verwenen.
 * Legen Sie einen Event Handler an, der die fehlgeschlagenen Authentifizierungsanfragen zählt.
 
 # Periodic Tasks
 
 *Periodic Tasks* sind regelmäßig ausgeführte Aufgaben. Diese werden über einen cronjob gesteuert.
 
+Die *Periodic Tasks* nutzen Module, die definieren, was regelmäßig wiederholt werden soll.
+Derzeit existieren die Module
 
+* EventCounter
+* SimpleStats
+
+Mit dem Modul *EventCounter* können aus den "gezählten" Ereignissen (aus dem Event Handler) Zeitreihen erzeugt
+werden.
+
+SimpleStats schreibt in regelmäßigen Abständen "Messwerte" wie die Tokenanzahl in eine Zeitreihe.
+
+.. note:: Prinzipiell sind verschiedene PeriodicTaskModule denkbar. So könnte es auch
+   Module geben, die bspw. die Tokendatenbank aufräumen oder das Auditlog rotieren. 
+
+Siehe https://privacyidea.readthedocs.io/en/latest/periodictask/index.html
+
+## Aufgaben
+
+* Erstellen Sie eine Aufgabe, die die fehlgeschlagenen Authentifizierungen in eine Zeitreihe schreibt.
+* Erstellen Sie eine Aufgabe, die Anzahl der Token in eine Zeitreihe schreibt.
 
 ## Statistiken und Grafana
+
+In der Datenbanktabelle ``monitoringstats`` werden die Zeitreihen gespeichert.
+Die Spalte "stats_key" bezeichnet dabei jeweils einen Messwert.
+Diese Werte können mit beliebigen Tools dargestellt werden.
+
+Bspw. bringt Grafana bereits ein Plugin, um Statistik-Daten aus einer MySQL-Datenbank auszulesen.
+
+### Aufgaben
+
+* Installieren Sie die Pakete ``grafana`` und ``grafana-data``.
+* Erstellen Sie in Grafana ein View, der die fehlgeschlagenen Authentifizierungen über die Zeit anzeigt.

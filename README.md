@@ -97,6 +97,9 @@ Siehe https://privacyidea.readthedocs.io/en/latest/policies/index.html
 ## Aufgaben
 
 * Legen Sie eine Richtlinie an, die als PIN das LDAP-Passwort des Benutzers erfordert.
+* Legen Sie eine Richtlinie an, die den Benutzer zwingt, einen privacyIDEA Authenticator
+  im 2step-enrollment auszurollen. Damit wird der Token an genau das eine Smartphone
+  gebunden.
 
 ## Migration und Passthru
 
@@ -126,6 +129,31 @@ Im Echtbetrieb möchte man nicht nur mit internen Administratoren arbeiten!
 
 # Event Handler
 
+Event Handler können zusätzliche Aktionen auslösen, wenn ein vorher definiertes Ereignis eintritt.
+Das Ereignis kann mit verschiedenen Bedingungen verknüpft werden. Die Ereignisse entsprechen dabei 
+den verschiedenen REST API endpoints.
+
+Die ausgelösten Aktionen definieren sich aus Event Handler Modulen.
+Es gibt zur Zeit die folgenden Module:
+
+* UserNotification
+* Token
+* Federation
+* Script
+* Counter
+
+## Aufgaben
+
+* Legen Sie einen Event Handler an, der den Benutzer mit einer Email benachrichtigt, wenn 
+  der Administrator für ihn einen neuen Token ausrollt.
+* Legen Sie einen Event Handler an, der den Token deaktiviert, wenn der Administrator
+  einen TOTP-Token ausrollt.
+* Legen Sie einen Event Handler an, der die fehlgeschlagenen Authentifizierungsanfragen zählt.
+
 # Periodic Tasks
+
+*Periodic Tasks* sind regelmäßig ausgeführte Aufgaben. Diese werden über einen cronjob gesteuert.
+
+
 
 ## Statistiken und Grafana
